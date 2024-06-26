@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.sugar.study.spring"/>
+
+
+    <!--<bean id="adminDao" class="com.sugar.study.spring.dao.impl.AdminDaoImpl"/>-->
+    <!--<bean id="roleDao" class="com.sugar.study.spring.dao.impl.RoleDaoImpl"/>-->
+
+
+    <!--<bean id="adminService" class="com.sugar.study.spring.service.impl.AdminServiceImpl" p:adminDao-ref="adminDao">-->
+        <!--<property name="adminDao" ref="adminDao"/>-->
+    <!--</bean>-->
+
+    <bean id="rb" class="com.sugar.study.spring.vo.ResourceBean" >
+        <property name="resource" value="classpath:applicationContext.xml"/>
+    </bean>
+
+    <bean id="rbs" class="com.sugar.study.spring.vo.ResourceBeanList" >
+        <property name="resources" >
+            <list>
+
+                <value>classpath:applicationContext.xml</value>
+                <value>https://yishoushi.cn/</value>
+                <value>file:/Users/sugar/sugar/asiainfo/JobContent/进入2019了.txt</value>
+            </list>
+
+
+        </property>
+    </bean>
+
+
+    <bean id="apple" class="com.sugar.study.spring.Apple"/>
+    <bean id="dept" class="com.sugar.study.spring.vo.Dept">
+        <property name="deptNo" value="10"/>
+        <property name="name" value="酬金"/>
+    </bean>
+    <bean id="deptA" class="com.sugar.study.spring.vo.Dept" primary="true">
+        <property name="deptNo" value="10"/>
+        <property name="name" value="酬金A"/>
+    </bean>
+    <bean id="emp" class="com.sugar.study.spring.vo.Emp" autowire="byType">
+        <property name="name" value="陈非晚"/>
+        <property name="empNo" value="1"/>
+        <!--<property name="empNo" ><null/></property>-->
+        <!--<property name="dept" ref="dept"/>-->
+        <property name="close" value="true"/>
+
+    </bean>
+
+    <bean id="company" class="com.sugar.study.spring.vo.Company" >
+        <property name="data">
+            <!--<array value-type="java.lang.Integer">-->
+            <array >
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </array>
+
+        </property>
+        <property name="msg">
+
+            <!--<array value-type="java.lang.String"> 如果不写类型 ，spring 自己回你判断类型-->
+            <array>
+                <value>嘿呀1</value>
+                <value>嘿呀2</value>
+                <value>嘿呀3</value>
+                <value>嘿呀4</value>
+
+            </array>
+        </property>
+
+        <property name="msgs">
+
+            <list value-type="java.lang.String">
+
+                <value>我</value>
+                <value>爱</value>
+                <value>你</value>
+                <value>中</value>
+                <value>国</value>
+
+            </list>
+        </property>
+        <property name="set">
+            <set value-type="java.lang.String">
+                <value>秦秀</value>
+                <value>陈非晚</value>
+                <value>陈小刚</value>
+                <value>陈小刚</value>
+            </set>
+        </property>
+        <property name="map">
+            <map key-type="java.lang.Integer" value-type="java.lang.String" >
+                <entry key="1" value="秦秀"/>
+                <entry key="2" value="陈小刚"/>
+                <entry key="2" value="陈秦"/>
+                <entry key="3" value="陈小刚"/>
+            </map>
+
+
+        </property>
+        <property name="properties">
+
+            <props>
+                <prop key="一首诗">www.yishoushi.cn</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>
