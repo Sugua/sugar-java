@@ -31,6 +31,7 @@ List、Set、Queue，Map的区别
   - `LinkedHashMap`：`LinkedHashMap`集成自`HashMap`，所以它的底层仍然是基于拉链时散列结构即由数组和链表或红黑树组成的。另外，`LinkedHashMap`在上面结构基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序，同时通过对链表进行操作，实现访问顺序相关逻辑。
   - `Hashtable`：数组+链表组成的，数组是`Hashtable`的主体，链表则是主要为了解决哈希冲突而存在的。
   - `TreeMap`：红黑树（自平衡的排序二叉树）。
+  - 
 
 
 
