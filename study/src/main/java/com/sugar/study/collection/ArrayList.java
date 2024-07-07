@@ -1,5 +1,7 @@
 package com.sugar.study.collection;
 
+import sun.plugin2.main.client.WMozillaServiceDelegate;
+
 import java.util.*;
 
 public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable {
@@ -344,4 +346,219 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
         size++;
 
     }
+
+    /**
+     * 删除该列表中指定位置的元素，将人格后序元素移动到左侧（从其索引中减去一个元素）
+     * @param index the index of the element to be removed
+     * @return
+     */
+    public E remove(int index) {
+        rangeCheck(index);
+        modCount++;
+        E oldValue = elementData(index);
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(elementData,index+1,elementData,index,numMoved);
+        }
+        elementData[--size] = null;//clear to let GC do ints work
+        return oldValue;
+    }
+
+    /**
+     * 从列表中删除指定元素的第一个出现（如果存在），如果列表不包含该元素，则它不会更改
+     * @param o element to be removed from this list, if present
+     * @return
+     */
+    public boolean remove(Object o) {
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (elementData[i] == null) {
+                    fastRemove(i);
+                    return true;
+                }
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (o.equals(elementData[i])) {
+                    fastRemove(i);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    /**
+     *
+     * @param index
+     */
+    private void fastRemove(int index) {
+        modCount++;
+        int numMoved = size - index - 1;
+
+        if (numMoved > 0) {
+            System.arraycopy(elementData, index + 1, elementData, index, numMoved);
+        }
+        elementData[--size] = null;
+    }
+
+    /**
+     * 从雷彪中删除所有元素
+     */
+    public void clear(){
+        modCount++;
+
+        //把数组中所有的元素的值设为null
+        for (int i = 0; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = 0;
+
+    }
+
+    /**
+     * 按指定集合的Iterator返回的顺序将指定结合中的所有元素追加到此列表的末尾。
+     * @param c collection containing elements to be added to this collection
+     * @return
+     */
+    public boolean addAll(Collection<? extends E> c) {
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);
+        System.arraycopy(a,0,elementData,size,numNew);
+
+        size += numNew;
+        return numNew != 0;
+
+    }
+
+    /**
+     * 将指定集合中的所有元素插入到此列表中，从指定的位置开始
+     * @param index index at which to insert the first element from the
+     *              specified collection
+     * @param c collection containing elements to be added to this list
+     * @return
+     */
+    public boolean addAll(int index, Collection<? extends E> c) {
+        rangeCheckForAdd(index);
+
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);
+
+        int numMoved = size - index;
+        if (numMoved > 0) {
+            System.arraycopy(elementData, index, elementData, index + numNew, numMoved);
+        }
+        System.arraycopy(a, 0, elementData, index, numNew);
+        size += numNew;
+        return numNew != 0;
+    }
+
+    /**
+     * 从此列表中删除所有索引formIndex(含）和toIndex之间的元素。
+     * 将任何后续元素移动到左侧（减少其索引）。
+     * @param formIndex index of first element to be removed
+     * @param toIndex index after last element to be removed
+     */
+    public void removeRange(int formIndex, int toIndex) {
+        modCount++;
+        int numMoved = size - toIndex;
+        System.arraycopy(elementData, toIndex, elementData, formIndex, numMoved);
+
+        int newSize = size - (toIndex - formIndex);
+        for (int i = newSize; i < size; i++) {
+            elementData[i] = null;
+        }
+        size = newSize;
+    }
+
+    /**
+     * 检查给定的索引是否子啊范围内。
+     * @param index
+     */
+    private void rangeCheck(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        }
+    }
+
+    /**
+     * add 和addAll适用rangeCheck的一个版本
+     */
+    private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+        }
+    }
+
+    /**
+     * 返回IndexOutOfBoundsException细节信息
+     * @param index
+     * @return
+     */
+    private String outOfBoundsMsg(int index) {
+        return "Index:" + index + ",Size:" + size;
+    }
+
+    /**
+     * 从此列表中删除指定集合中包含的所有元素
+     * @param c collection containing elements to be removed from this list
+     * @return
+     */
+    public boolean removeAll(Collection<?> c) {
+        Objects.requireNonNull(c);
+        //如果此列表被修改则返回true
+        return batchRemove(c,false);
+    }
+
+    /**
+     * 仅保留此列表中包含在指定集合中的元素。
+     * 换句话说，从此列表中删除其中不包含指定集合中的所有元素
+     * @param c collection containing elements to be retained in this list
+     * @return
+     */
+    public boolean retainAll(Collection<?> c){
+        Objects.requireNonNull(c);
+        return batchRemove(c, true);
+    }
+
+    /**
+     * 从列表中的指定位置开始，返回列表中的元素（按正确顺序）的列表迭代器。
+     * 指定的索引表示初始调用将返回的第一个元素为next。初始调用previous将返回指定索引减1的元素。
+     * 返回的列表迭代器是fail-fast。
+     * @param index index of the first element to be returned from the
+     *        list iterator (by a call to {@link ListIterator#next next})
+     * @return
+     */
+    public ListIterator<E> listIterator(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("index:" + index);
+        }
+        return new listItr(index);
+    }
+
+    /**
+     * 返回列表中的列表迭代器（按时到的顺序）
+     * 返回的列表迭代器是fail-fast
+     * @return
+     */
+    public ListIterator<E> listIterator(){
+        return new listItr(0);
+    }
+
+    /**
+     * 按正确的顺序返回该列表中的元素的迭代器
+     * 返回的迭代器是fail-fast
+     * @return
+     */
+    public Iterator<E> iterator(){
+        return new Itr();
+    }
+
+
+
+
 }
