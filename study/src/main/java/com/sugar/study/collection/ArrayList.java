@@ -1,9 +1,8 @@
 package com.sugar.study.collection;
 
 import java.util.*;
-import java.util.function.UnaryOperator;
 
-public class ArrayList<E> extends AbstractList implements List<E>, RandomAccess, Cloneable, java.io.Serializable {
+public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable {
 
     /**
      * 默认初始化容量大小
@@ -143,42 +142,206 @@ public class ArrayList<E> extends AbstractList implements List<E>, RandomAccess,
         //我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将容量更新为旧容量的1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         //然后检查新容量是否大于最小需要的容量，若还是最小需要容量，那么就把最小容量当作数组的新容量
+        if (newCapacity-minCapacity<0){
+            newCapacity=minCapacity;
+            //再检查新容量是否超出了ArrayList所定义的最大容量
+            //若超出了，则调用胡歌Capacity()来比较minCapacity和MAX_ARRAY_SIZE
+            if (newCapacity-MAX_ARRAY_SIZE>0){
+                newCapacity = hugeCapacity(minCapacity);
+            }
+            elementData = Arrays.copyOf(elementData, newCapacity);
+        }
 
     }
 
+    //比较minCapacity 和MAX_ARRAY_SIZE
+    private static int hugeCapacity(int minCapacity){
 
-
-    @Override
-    public E get(int index) {
-        return null;
+        if (minCapacity<0){
+            throw new OutOfMemoryError();
+        }
+        return (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;
     }
 
+    /**
+     * 返回此列表中的元素数
+     * @return
+     */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
-    @Override
-    public void replaceAll(UnaryOperator operator) {
-        super.replaceAll(operator);
+    /**
+     * 如果此列表不包含元素，则返回true
+     * @return
+     */
+    public boolean isEmpty(){
+        //主义=和==的区别
+        return size == 0;
     }
 
-    @Override
-    public ArrayListCode<E> clone() {
+    /**
+     * 如果此列表包含指定的元素，则返回true
+     * @param o element whose presence in this list is to be tested
+     * @return
+     */
+    public boolean contains(Object o){
+        return indexOf(o) >= 0;
+    }
+
+    /**
+     * 返回此列表中指定元素的首次出现的索引， 如果此列表不包含此元素，则为-1
+     * @param o element to search for
+     * @return
+     */
+    public int indexOf(Object o){
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (elementData[i] == null) {
+                    return i;
+                }
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                //equals()方法比较
+                if (o.equals(elementData[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 返回此列表中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1
+     * @param o element to search for
+     * @return
+     */
+    public int lastIndexOf(Object o) {
+        if (o==null){
+            for (int i = size-1; i >=0 ; i--) {
+                if (elementData[i] == null) {
+                    return i;
+                }
+
+            }
+        }else {
+            for (int i = size-1; i >=0 ; i--) {
+                if (o.equals(elementData[i])) {
+                    return i;
+                }
+
+            }
+        }
+        return -1;
+    }
+
+    public Object clone() {
         try {
-            return (ArrayListCode) super.clone();
+            ArrayList<?> v = (ArrayList<?>) super.clone();
+            //Arrays.copyOf功能实现数组的复制，返回复制后的数组，参数被复制的数组和复制的长度
+            v.elementData = Arrays.copyOf(elementData, size);
+            v.modCount=0;
+            return v;
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            //这不应该发生，因为我们是可以克隆的
+            throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void sort(Comparator c) {
-        super.sort(c);
+    /**
+     * 以正确的顺序（从第一个到最后一个元素）返回一个包含此列表中所有元素的数组
+     * 返回的数组将是“安全的”，因为该列表不保留对它的引用。（换句话说，这个方法必须分配一个新的数组）。
+     * 因此，调用者可以自由地修改返回的数组，此方法从单个基于阵列和基于稽核的API之间的桥梁
+     * @return
+     */
+    public Object[] toArray() {
+        return Arrays.copyOf(elementData, size);
     }
 
-    @Override
-    public Spliterator<E> spliterator() {
-        return super.spliterator();
+    /**
+     * 以正确的顺序返回一个包含此列表中所有元素的数组（从第一个到最后一个元素）
+     * 返回的数组的运行时类型是指定数组的运行时的类型。如果列表适合指定的数组，则返回其中
+     * 否则，将为指定数组的运行时类型和此列表大小分配一个新数组
+     * 如果列表适用于指定的数组，其余空间（即数组的列表数量多余此元素），则紧跟着在集合借宿后的数组中的元素设置设置为null
+     * （这仅在调用者知道列表不包含任何空元素的情况下才能确定列表的长度）。
+     * @param a the array into which the elements of this list are to
+     *          be stored, if it is big enough; otherwise, a new array of the
+     *          same runtime type is allocated for this purpose.
+     * @return
+     * @param <T>
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(T[] a) {
+        if (a.length < size) {
+            //新建一个运行时类型的数组，但是ArrayList数组的内容
+            return (T[]) Arrays.copyOf(elementData, size, a.getClass());
+        }
+        //调用System提供的arrcycopy()方法实现数组之间的复制
+        System.arraycopy(elementData, 0, a, 0, size);
+        if (a.length > size) {
+            a[size] = null;
+        }
+        return a;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    E elementData(int index){
+        return (E) elementData[index];
+    }
+
+    /**
+     * 返回此列表中指定位置的元素
+     * @param index index of the element to return
+     * @return
+     */
+    public E get(int index) {
+        rangeCheck(index);
+        return elementData(index);
+    }
+
+    /**
+     * 用指定的元素替换列表中指定的位置的元素
+     * @param index index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return
+     */
+    public E set(int index, E element) {
+        //对index进行界限检查
+        rangeCheck(index);
+        E oldValue = elementData(index);
+        //返回原来在这个位置元素
+        return oldValue;
+    }
+
+    /**
+     * 将指定元素追加到此列表的末尾
+     * @param e element whose presence in this collection is to be ensured
+     * @return
+     */
+    public boolean add(E e) {
+        ensureCapacityInternal(size+1);
+        //这里看到ArrayList添加元素的实质就相当于为数组赋值
+        elementData[size++] = e;
+        return true;
+    }
+
+    /**
+     * 在此列表中的指定位置插入指定的元素
+     * 先调用rangeCheckForAdd对index进行界限检查；然后调用ensureCapacityInternal 方法保证capacity足够大
+     * 再将从index开始之后的所有成员后后移一个位置；将element插入index位置；最后size+1
+     * @param index index at which the specified element is to be inserted
+     * @param element element to be inserted
+     */
+    public void add(int index, E element) {
+        rangeCheckForAdd(index);
+        ensureCapacityInternal(size+1);
+        //arraycopy()这个实现数组之间复制的方法一定要看一下，下面就用到arraycopy()方法实现数组自己复制自己
+        System.arraycopy(element, index, elementData, index + 1, size - index);
+        elementData[index]=element;
+        size++;
+
     }
 }
