@@ -1,6 +1,5 @@
 package com.sugar.study.collection;
 
-import sun.plugin2.main.client.WMozillaServiceDelegate;
 
 import java.util.*;
 
