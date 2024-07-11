@@ -27,8 +27,9 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, Clone
     //桶中结构转化wield红黑树对应的table的最小容量
     static final int MIN_TREEIFY_CAPACITY = 64;
 
-    //存储元素的数组，总是2 的幂次倍
-    transient Node<K,V>[] table;
+    //存储元素的数组，总是2 的幂次倍t
+//    todo 不用打开，这个Node是HashMap的内部类
+//    transient Node<K,V>[] table;
 
     //一个包含了映射中所有键值对的集合视图
     transient Set<Entry<K,V>> entrySet;
@@ -48,5 +49,8 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, Clone
         this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
     }
 
-
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+        return null;
+    }
 }
