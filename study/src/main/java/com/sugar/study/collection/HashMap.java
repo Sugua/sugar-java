@@ -44,6 +44,11 @@ public class HashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>, Clone
     int threshold;
 
     //负载因子
+
+
+
+
+
     final float loadFactor;
     public HashMap() {
         this.loadFactor = DEFAULT_LOAD_FACTOR; // all other fields defaulted
