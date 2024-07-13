@@ -42,7 +42,7 @@ public class MapTest {
 
         n |= n >>> 16;
         System.out.println(n + ": " + Integer.toBinaryString(n));
-
+//        map的初始容量大小
 
     }
 }
