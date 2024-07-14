@@ -44,5 +44,6 @@ public class MapTest {
         System.out.println(n + ": " + Integer.toBinaryString(n));
 //        map的初始容量大小
 
+        //容量变成2的n次方的数方便移动
     }
 }
