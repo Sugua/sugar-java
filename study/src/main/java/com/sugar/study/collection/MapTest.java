@@ -48,5 +48,11 @@ public class MapTest {
         //休息两天
 
         //tableSizeFor
+
+
+//        tab[i = (n - 1) & hash])
+
+        int i = 10 & 2;
+        System.out.println(i);
     }
 }
