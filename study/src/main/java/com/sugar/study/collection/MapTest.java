@@ -52,7 +52,7 @@ public class MapTest {
 
 //        tab[i = (n - 1) & hash])
 
-        int i = 10 & 2;
+        long i = 1721814967658L & 99999999;
         System.out.println(i);
     }
 }
