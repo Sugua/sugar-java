@@ -53,6 +53,8 @@ public class MapTest {
 //        tab[i = (n - 1) & hash])
 
         long i = 1721814967658L & 99999999;
+
+        //还有什么低代码
         System.out.println(i);
     }
 }
