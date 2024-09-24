@@ -1,5 +1,7 @@
 package com.sugar.study.thread;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -8,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
  * @Date 2021/3/18 10:28 AM
  * @Version 1.0
  */
+@Slf4j
 public class T01_CacheLine {
     public static long COUNT = 100000000L;
 
@@ -31,10 +34,11 @@ public class T01_CacheLine {
             for (int i=0;i<COUNT;i++) {
 
                 arr[0].x = i;
+                
             }
             latch.countDown();
 
-        });
+        },"思搜视频");
 
         Thread t2 = new Thread(() -> {
 
