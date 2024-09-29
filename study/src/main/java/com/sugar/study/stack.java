@@ -19,7 +19,7 @@ public class stack {
 
 
 
-
+//利用栈后进先出的思想来检测
 
     }
 
