@@ -20,10 +20,19 @@ import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.property.VerticalAlignment;
 
+import java.io.File;
+import java.io.InputStream;
+
 public class PdfWithImageAndTable {
     public static void main(String[] args) {
-        String dest = "example_with_image_and_table.pdf";
+        String dest = "pdf/example_with_image_and_table.pdf";
         try {
+            File f = new File("pdf");
+            if (f.exists()){
+                System.out.println("lala");
+                f.mkdirs();
+
+            }
             PdfWriter writer = new PdfWriter(dest);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf, PageSize.A3);
@@ -40,13 +49,42 @@ public class PdfWithImageAndTable {
             Table table = new Table(UnitValue.createPercentArray(13)).useAllAvailableWidth();
             writeHeader(table);
 
+            for (int i = 0; i < 130; i++) {
+                table.addCell(String.valueOf(i)) ;
+            }
+
+            writerEnd(table);
             document.add(table);
 
+
             document.close();
+            pdf.close();
+            writer.close();
+
             System.out.println("PDF with Image and Table Created!");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void writerEnd(Table table) {
+        Cell blank = new Cell(2, 13).add(new Paragraph("\n\t"));
+        blank.setBorder(Border.NO_BORDER);
+        blank.setTextAlignment(TextAlignment.RIGHT);
+
+        table.addCell(blank);
+
+        Cell confirmCell = new Cell(1, 13).add(new Paragraph("确认人：\t\t\t\t\t"));
+        confirmCell.setBorder(Border.NO_BORDER);
+        confirmCell.setTextAlignment(TextAlignment.RIGHT);
+        table.addCell(confirmCell);
+
+
+        Cell date = new Cell(1, 13).add(new Paragraph("日期：\t\t\t\t\t"));
+        date.setBorder(Border.NO_BORDER);
+        date.setTextAlignment(TextAlignment.RIGHT);
+        table.addCell(date);
+
     }
 
     private static void writeHeader(Table table) {
@@ -59,39 +97,35 @@ public class PdfWithImageAndTable {
         titleCell.setBorder(Border.NO_BORDER);
         titleCell.setTextAlignment(TextAlignment.CENTER);
         titleCell.setBold();
-        table.addCell(titleCell);
+        table.addHeaderCell(titleCell);
 
         Paragraph unit = new Paragraph("单位：元");
         unit.setFontSize(7);
         Cell unitCell = new Cell(1, 13).add(unit);
         unitCell.setBorder(Border.NO_BORDER);
         unitCell.setTextAlignment(TextAlignment.RIGHT);
-        table.addCell(unitCell);
+        table.addHeaderCell(unitCell);
 
-        table.addCell(new Cell(2,1).add(new Paragraph("账期")));
-        table.addCell(new Cell(2,1).add(new Paragraph("地市")));
-        table.addCell(new Cell(2,1).add(new Paragraph("渠道编码")));
-        table.addCell(new Cell(2,1).add(new Paragraph("渠道名称")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("账期")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("地市")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("渠道编码")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("渠道名称")));
 
-        table.addCell(new Cell(1,5).add(new Paragraph("应发")));
-        table.addCell(new Cell(1,2).add(new Paragraph("积金池")));
+        table.addHeaderCell(new Cell(1,5).add(new Paragraph("应发")));
+        table.addHeaderCell(new Cell(1,2).add(new Paragraph("积金池")));
 
-        table.addCell(new Cell(2,1).add(new Paragraph("税费")));
-        table.addCell(new Cell(2,1).add(new Paragraph("实发")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("税费")));
+        table.addHeaderCell(new Cell(2,1).add(new Paragraph("实发")));
 
-        table.addCell("CHBN基础业务");
-        table.addCell("星级积分激励");
-        table.addCell("房租积分激励");
-        table.addCell("分公司激励");
-        table.addCell("分公司扣罚");
-        table.addCell("积金池扣留");
-        table.addCell("积金池补贴");
+        table.addHeaderCell("CHBN基础业务");
+        table.addHeaderCell("星级积分激励");
+        table.addHeaderCell("房租积分激励");
+        table.addHeaderCell("分公司激励");
+        table.addHeaderCell("分公司扣罚");
+        table.addHeaderCell("积金池扣留");
+        table.addHeaderCell("积金池补贴");
         table.setTextAlignment(TextAlignment.CENTER);
         table.setVerticalAlignment(VerticalAlignment.BOTTOM);
-
-
-
-
 
 
     }
