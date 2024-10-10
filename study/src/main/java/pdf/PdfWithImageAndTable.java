@@ -25,7 +25,7 @@ import java.io.InputStream;
 
 public class PdfWithImageAndTable {
     public static void main(String[] args) {
-        String dest = "pdf/example_with_image_and_table.pdf";
+        String dest = "pdf/报账单[5236485]-九机才子汇店[523645]-费用告知单.pdf";
         try {
             File f = new File("pdf");
             if (f.exists()){
