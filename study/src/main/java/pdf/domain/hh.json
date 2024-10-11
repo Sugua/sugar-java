@@ -1,0 +1,78 @@
+{
+  "clientId":"",
+  "clientSecret":"",
+  "contractName": "环保厅本地测试0318-",
+  "contractType": 1,
+  "signType": 0,
+  "signProcess": 0,
+  "commonType": 0,
+  "platformType":4,
+  "files": [
+    {
+      "fileId": "D7091C7333F910547FE9B9805F4B9DC086863A08F2C78E4E528A7485DE6FD2A0FF4037B9C311091262BB33C9DC2D3460",
+      "size": 75700,
+      "pages": 4,
+      "name": "测试专用文件.pdf",
+      "fileType": 1,
+      "signSettingParam": [
+        {
+          "left": 140.54168701171875,
+          "top": 171.11111068725586,
+          "code": "",
+          "newcode":"69B239D84682420A202269A8294AE53D",
+          "codeName": "杨凯",
+          "orgName": "-1",
+          "method": 0,
+          "width": 80,
+          "height": 28,
+          "hideTag": false,
+          "chapterType": 3,
+          "bgClass": "rgba(243,123,29,1)",
+          "page": 1,
+          "isDraggable": true,
+          "fileId": "D7091C7333F910547FE9B9805F4B9DC086863A08F2C78E4E528A7485DE6FD2A0FF4037B9C311091262BB33C9DC2D3460",
+          "hideDel": false,
+          "content": "",
+          "remark": "",
+          "active": false,
+          "uuid": "0d285e0c-154a-4499-9acf-ad63609101bc",
+          "valSetting": {
+            "fontColor": "#000000"
+          },
+          "lock": true,
+          "lock2": true,
+          "rotatable": true,
+          "degree": 0,
+          "parentLimit": true,
+          "index": 0,
+          "width2": 136,
+          "height2": 47.6,
+          "y1": "171.11",
+          "x1": "140.54",
+          "yc": "194.91",
+          "xc": "208.54",
+          "apply": 0,
+          "applyTitle": "",
+          "keyWord": "",
+          "keyIndex": 0,
+          "keyWordLeft": 10.0,
+          "keyWordRight": 0.0,
+          "keyWordTop": 5.0,
+          "keyWordBottom": 0.0,
+        }
+      ]
+    }
+  ],
+  "players": [
+    {
+      "account": "F94654D090BC2CC418764669E5667D63",
+      "name": "A20C89BC67ECB83C9E9064FE7FE5FA2D",
+      "orgName": "-1",
+      "bgClass": "",
+      "code": "",
+      "method": 0,
+      "processType": 0,
+      "sort": "1",
+      "type": 1
+    }    ]
+}
