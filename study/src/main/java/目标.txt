@@ -1,0 +1,17 @@
+
+技术栈如下：
+
+熟练掌握 java 基础知识，对集合、多线程、IO 流等有深入理解，具备良好的面向对象 的编程思想，熟悉常用的设计模式
+熟悉多线程、线程池，掌握乐观锁、悲观锁的使用，熟悉 ThreadLocal 、volatile 、 ReentrantLock 、CountDownLatch ，并在项目中熟练使用
+熟悉 JVM ，对类加载机制、GC 算法、垃圾回收器有深入了解，熟悉 jvm 调优常用参数及 调优工具
+熟悉 Spring 、SpringMVC 、SpringBoot 、Mybatis 、MyBatis-Plus 等核心框架的使用及 其原理，看过部分源码，熟悉 Spring 的 refresh 流程，bean 的生命周期，AOP 的实现
+熟悉 SpringCloud 、SpringCloudAlibaba 微服务框架，熟悉 Nacos 注册中心和配置中 心，熟悉服务拆分、服务治理、服务保护，并具备线上项目经验
+熟悉分布式事务框架 Seata 、熟悉 XA 、AT 模式的实现原理，熟悉 CAP 、BASE 理论
+熟悉 MySQL 、Oracle ，深入理解 MySQL 事务、锁、索引实现机制，熟悉主从复制、读写 分离、分库分表，熟悉 redo log 、undo log 、MVCC 的实现原理，熟悉 EXPLAIN 执行计 划，有 sql 调优经验
+熟悉 Redis ，熟悉缓存穿透、击穿、雪崩及其解决方案，熟悉 Redis 的持久化方式、双 写一致性、数据过期、淘汰策略、哨兵机制，熟悉 Redis 分布式锁的使用
+熟悉消息中间件 RabbitMQ 、RocketMQ 、Kafka ，熟悉消息模型，熟悉消息的可靠性解决 方案，熟悉死信交换机和延迟队列的使用
+熟悉 Elasticsearch 的使用，熟悉倒排索引、IK 分词器，熟悉 API 的使用和 DSL 语法
+熟悉 WebSocket 编程，熟悉 Springboot 整合 WebSocket 的方式，开发过基于 WebSocket 的在线实时对战功能，具备优化 WebSocket 性能和安全性的实践经验
+熟悉分布式文件存储系统 MinIO 的使用，熟悉搭建流程
+熟悉 Docker 的常用命令，熟悉 Dockerfile 文件语法、镜像构建，熟悉 DockerCompose
+熟悉 Vue3+TS+Pinia+Element-Plus 前端框架，熟悉 uni-app 语法，熟悉微信小程序的 开发
