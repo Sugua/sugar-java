@@ -18,8 +18,8 @@
         {
           "left": 140.54168701171875,
           "top": 171.11111068725586,
-          "code": "",
-          "newcode":"69B239D84682420A202269A8294AE53D",
+          "code": "签署人编码",
+          "newcode":"-1",
           "codeName": "杨凯",
           "orgName": "-1",
           "method": 0,
@@ -58,7 +58,7 @@
           "keyWordLeft": 10.0,
           "keyWordRight": 0.0,
           "keyWordTop": 5.0,
-          "keyWordBottom": 0.0,
+          "keyWordBottom": 0.0
         }
       ]
     }
