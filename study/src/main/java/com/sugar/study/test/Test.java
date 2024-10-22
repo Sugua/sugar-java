@@ -1,5 +1,6 @@
 package com.sugar.study.test;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -7,12 +8,15 @@ import java.util.*;
 public class Test {
     public static void main(String[] args) {
         strContains();
-        String exp = "if(${1012.在网月数}==${1022.在网月数}) return ture";
+        String exp = "if(${1012.在网月数}==${1022.在网天数}) return ture";
+        List<String> list=new ArrayList<>();
         Map<Integer, Integer> map = indexItem(exp + "e");
         System.out.println(map);
-        map.forEach((i,k)->
-            System.out.println(exp.substring(i, k+1))
+        map.forEach((i,k)->list.add(exp.substring(i, k+1))
         );
+        System.out.println(list);
+        String join = StringUtils.join(list, ",");
+        System.out.println(join);
 
 
     }
