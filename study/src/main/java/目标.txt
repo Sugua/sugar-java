@@ -14,4 +14,4 @@
 熟悉 WebSocket 编程，熟悉 Springboot 整合 WebSocket 的方式，开发过基于 WebSocket 的在线实时对战功能，具备优化 WebSocket 性能和安全性的实践经验
 熟悉分布式文件存储系统 MinIO 的使用，熟悉搭建流程
 熟悉 Docker 的常用命令，熟悉 Dockerfile 文件语法、镜像构建，熟悉 DockerCompose
-熟悉 Vue3+TS+Pinia+Element-Plus 前端框架，熟悉 uni-app 语法，熟悉微信小程序的 开发
+熟悉 Vue3+TS+Pinia+Element-Plus 前端框架，熟悉 uni-app 语法，熟悉微信小程序的 开发x
