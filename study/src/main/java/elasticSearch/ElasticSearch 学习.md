@@ -14,7 +14,7 @@ ElasticSearch和关系型数据库的区别大致：
 
 - URL
 
-  `localhost:9200/hello`
+  `localhost:9200/{index_name}`
 
 - 请求方式
 
@@ -57,6 +57,132 @@ ElasticSearch和关系型数据库的区别大致：
     "index": "hello"
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+#### **删除索引库index------DELETE**
+
+- URL
+
+  `localhost:9200/{index_name}`
+
+- 请求方式
+
+​		`DELETE`
+
+- 入参实例：
+
+```json
+first_index
+```
+
+参数返回：
+
+```json
+{
+    "acknowledged": true
+}
+```
+
+
+
+
+
+
+
+
+
+#### **创建文档document（向索引库中添加内容）---POST**
+
+- URL
+
+  `localhost:9200/{index_name}/{docment_name}}/{_id}`
+
+  请求方式
+
+​		`POST`
+
+- 入参实例：
+
+```json
+{
+    "id": 1,
+    "title": "ElasticSearch是一个基于Lucene的搜索服务器",
+    "content": "它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。"
+}
+```
+
+参数返回：
+
+```json
+{
+    "_index": "hello",
+    "_id": "1",
+    "_version": 1,
+    "result": "created",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "_seq_no": 0,
+    "_primary_term": 1
+}
+```
+
+
+
+
+
+
+
+#### **修改文档document（向索引库中添加内容）---POST**
+
+- URL
+
+  `localhost:9200/{index_name}/{docment_name}}/{_id}`
+
+- 请求方式
+
+​		`POST`
+
+- 入参实例：
+
+```json
+{
+    "id": 1,
+    "title": "修改ElasticSearch是一个基于Lucene的搜索服务器",
+    "content": "它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。"
+}
+```
+
+参数返回：
+
+```json
+{
+    "_index": "hello",
+    "_id": "1",
+    "_version": 2,
+    "result": "updated",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "_seq_no": 2,
+    "_primary_term": 1
+}
+```
+
+
 
 
 
