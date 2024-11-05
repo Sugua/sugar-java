@@ -186,3 +186,89 @@ first_index
 
 
 
+
+
+
+
+
+
+#### **根据id查询文档document---GET**
+
+- URL
+
+  `localhost:9200/{index_name}/{docment_name}}/{_id}`
+
+- 请求方式
+
+​		`GET`
+
+- 入参实例：
+
+```json
+
+```
+
+参数返回：
+
+```json
+{
+    "_index": "hello",
+    "_id": "1",
+    "_version": 2,
+    "_seq_no": 2,
+    "_primary_term": 1,
+    "found": true,
+    "_source": {
+        "id": 1,
+        "title": "修改---ElasticSearch是一个基于Lucene的搜索服务器",
+        "content": "修改---它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。"
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+#### **删除文档document---DELETE**
+
+- URL
+
+  `localhost:9200/{index_name}/{docment_name}}/{_id}`
+
+- 请求方式
+
+​		`DELETE`
+
+- 入参实例：
+
+```json
+
+```
+
+参数返回：
+
+```json
+{
+    "_index": "hello",
+    "_id": "1",
+    "_version": 3,
+    "result": "deleted",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "_seq_no": 3,
+    "_primary_term": 1
+}
+```
+
+
+
+
+
