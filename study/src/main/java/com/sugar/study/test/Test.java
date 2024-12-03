@@ -1,13 +1,50 @@
 package com.sugar.study.test;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
+@Slf4j
 public class Test {
     public static void main(String[] args) {
-        strContains();
+//        strContains();
+//        contains$();
+
+        JSONObject BUSI_INFO = new JSONObject();
+        JSONObject PUB_INFO = new JSONObject();
+        JSONObject REQ_PARAM = new JSONObject();
+        JSONObject json = new JSONObject();
+        BUSI_INFO.put("clientId",null);
+        REQ_PARAM.put("BUSI_INFO",BUSI_INFO);
+        REQ_PARAM.put("PUB_INFO",PUB_INFO);
+
+        json.put("REQ_PARAM",REQ_PARAM);
+//        String jsonStringWithNull = json.toJSONString(SerializerFeature.WriteMapNullValue);
+
+        log.info("{}", json);
+
+        // 创建一个 JSONObject
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", "Alice");
+        jsonObject.put("age", null);
+        jsonObject.put("city", "New York");
+
+        // 默认情况下 toJSONString 会忽略值为 null 的键
+        String defaultJsonString = jsonObject.toJSONString();
+        System.out.println("默认 JSON 字符串: " + defaultJsonString);
+
+        // 使用 SerializerFeature.WriteMapNullValue 保留值为 null 的键
+        String jsonStringWithNull = jsonObject.toString(SerializerFeature.WriteMapNullValue);
+        System.out.println("保留 null 值的 JSON 字符串: " + jsonStringWithNull);
+
+    }
+
+    private static void contains$() {
         String exp = "if(${1012.在网月数}==${1022.在网天数}) return ture";
         List<String> list=new ArrayList<>();
         Map<Integer, Integer> map = indexItem(exp + "e");
@@ -17,8 +54,6 @@ public class Test {
         System.out.println(list);
         String join = StringUtils.join(list, ",");
         System.out.println(join);
-
-
     }
 
     private static Map<Integer,Integer> indexItem(String expExtension) {
