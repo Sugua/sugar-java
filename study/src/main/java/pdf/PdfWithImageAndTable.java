@@ -19,9 +19,13 @@ import com.itextpdf.layout.property.UnitValue;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.property.VerticalAlignment;
+import org.apache.commons.collections.MapUtils;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class PdfWithImageAndTable {
     public static void main(String[] args) {
@@ -48,9 +52,9 @@ public class PdfWithImageAndTable {
 //            float[] pointColumnWidths = {150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F, 150F};
             Table table = new Table(UnitValue.createPercentArray(13)).useAllAvailableWidth();
             writeHeader(table);
-
+            Map<String, Object> map=new HashMap<>();
             for (int i = 0; i < 130; i++) {
-                table.addCell(String.valueOf(i)) ;
+                table.addCell(MapUtils.getString(map,"STAT_MONTH","")) ;
             }
 
             writerEnd(table);
