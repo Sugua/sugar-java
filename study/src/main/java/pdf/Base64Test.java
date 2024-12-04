@@ -13,8 +13,8 @@ import java.util.Base64;
 public class Base64Test {
     public static void main(String[] args) {
         String dest = "pdf/报账单[400008133]-陕西网讯科技[31011012]-费用告知单.pdf";
-        String base64String = minFileToBase64(dest);
-        log.info("base64Str={}",base64String);
+        String base64String = fileToBase64(dest);
+        log.info("base64Str={}", base64String);
 
         minBase64toFile(base64String);
     }
@@ -47,12 +47,13 @@ public class Base64Test {
 
 
     public static String fileToBase64(String dest) {
-        try (FileInputStream fis = new FileInputStream(new File(dest))){
-            StringBuilder sb=new StringBuilder();
+        try (FileInputStream fis = new FileInputStream(new File(dest))) {
+            StringBuilder sb = new StringBuilder();
 
-            byte[] buffer = new byte[1024*8];
+            byte[] buffer = new byte[1024 * 8];
             int bytesRead;
-            while (( bytesRead= fis.read())!=-1){
+            while ((bytesRead = fis.read(buffer)) != -1) {
+
 //                byte[] actualChunk=new byte[bytesRead];
 //                System.arraycopy(buffer,0,actualChunk,0,bytesRead);
 //                sb.append(Base64.getEncoder().encodeToString(actualChunk));
@@ -63,16 +64,16 @@ public class Base64Test {
                 // 将数据块编码为 Base64 并追加到 StringBuilder 中
                 sb.append(Base64.getEncoder().encodeToString(actualChunk));
             }
-            log.debug( "encode = {} ",sb.toString() );
+            log.debug("encode = {} ", sb.toString());
             return sb.toString();
         } catch (Exception e) {
-            log.error("转码失败:",e);
+            log.error("转码失败:", e);
             throw new RuntimeException("转码失败，请联系管理员");
         }
     }
 
 
-    public static String minFileToBase64(String filePath){
+    public static String minFileToBase64(String filePath) {
 //        String filePath = "path/to/your/file.ext"; // 请替换为你的文件路径
 
         try {
