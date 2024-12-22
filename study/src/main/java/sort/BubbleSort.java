@@ -5,6 +5,7 @@ package sort;
  * 冒泡排序
  *
  * 一次比较两个元素，如果顺序错误就进行交换
+ * 可以里一个flag 如果是正序，就不需要遍历
  */
 public class BubbleSort {
     public static void main(String[] args) {
@@ -26,12 +27,16 @@ public class BubbleSort {
     public static void sort(int[] array){
 
         for (int i = 0; i < array.length; i++) {
+            boolean flag = true;
             for (int j = 0; j < array.length-1-i; j++) {
                 if (array[j]>array[j+1]){
                     int temp = array[j];
                     array[j] = array[j+1];
                     array[j+1] = temp;
+                    flag = false;
+
                 }
+                if (flag)break;
             }
 
         }
