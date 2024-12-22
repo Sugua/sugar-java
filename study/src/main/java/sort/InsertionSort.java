@@ -29,13 +29,17 @@ public class InsertionSort {
     }
 
     public static void sort1(int[] array) {
+        //直接从第1个开始，因为第0个就是一个元素默认是有序的
         for (int i = 1; i < array.length; i++) {
+            //记录要插入的数据
             int temp = array[i];
             int j = i;
+            //从已经排好序的序列最右边的开始比较，找到比其小的数
             while (j > 0 && temp < array[j - 1]) {
                 array[j] = array[j - 1];
                 j--;
             }
+            //存在比其小的数直接插入
             if (j != i) {
                 array[j] = temp;
             }
