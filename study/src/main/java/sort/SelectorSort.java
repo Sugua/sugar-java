@@ -10,7 +10,7 @@ public class SelectorSort {
 //        BubbleSort.printArray(array);
 
         double t=1;
-        System.out.println(t++);
+        System.out.println(++t);
 
     }
     public static void sort(int[] array) {
