@@ -2,12 +2,16 @@ package sort;
 
 public class SelectorSort {
     public static void main(String[] args) {
-        int[] array = {10,1, 4, 3, 2, 5, 0};
+//        int[] array = {10,1, 4, 3, 2, 5, 0};
+//
+//        BubbleSort.printArray(array);
+//        sort(array);
+//
+//        BubbleSort.printArray(array);
 
-        BubbleSort.printArray(array);
-        sort(array);
+        double t=1;
+        System.out.println(t++);
 
-        BubbleSort.printArray(array);
     }
     public static void sort(int[] array) {
 
