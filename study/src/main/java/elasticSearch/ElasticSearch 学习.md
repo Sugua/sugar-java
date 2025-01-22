@@ -271,4 +271,47 @@ first_index
 
 
 
+_update 更新命令
+
+
+###关于文档的基本操作
+-  基本的操作
+
+
+	- 创建文档 PUT
+	
+		- ==PUT== /{index}/{typename}/{id}
+	-  获取 ==GET==
+
+		- ==GET== /{index}/{typename}/_search
+	-  更新 POST _update 推荐使用_update，_update可以精确去修改莫哥字段，post修改整个文档，没有赋值的字段值空。
+-  复杂的操作
+
+	query{match}
+	sort（排序）
+	from/size(分页)
+	bool/must 多条件查询and
+	bool/should or
+	must_not !=
+	filter 进行数据的过滤
+	
+- 精确查询
+
+term岔村是直接通过倒排索引指定的词条进行精确查询
+
+**关于分词：**
+
+	- term，直接查询精确的
+	- match，会使用分词器解析（先分析文档，然后通过分析的文档进行查询）
+
+
+**两个类型**
+
+- keyword字段不会分词器分析
+- text字段会被分词器分析
+
+ 
+ 
+
+
 
