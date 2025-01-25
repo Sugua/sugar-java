@@ -3,6 +3,7 @@ package com.sugar.study.thread.juc.threadPool;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -77,6 +78,7 @@ public class CoreThreadPool implements Executor {
     public static void main(String[] args) throws InterruptedException {
         CoreThreadPool pool = new CoreThreadPool(5);
 
+//        new ThreadPoolExecutor()
 
         IntStream.range(0, 10).forEach(i -> pool.execute(() -> System.out.println(String.format("Thread:%s,value:%d", Thread.currentThread().getName(), i))));
         Thread.sleep(Integer.MAX_VALUE);
