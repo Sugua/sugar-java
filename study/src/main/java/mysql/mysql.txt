@@ -1,0 +1,34 @@
+explain
+    表头
+    id  select_type    table   type    possible_keys   key   key_len ref   rows    extra
+
+        id:表示执行顺序，id越大越先执行
+        select_type:
+                    simple 简单的select查询，查询中不包含查询或者union
+                    primary 查询中有自查询，最外侧被标记为primary
+                    subquery 子查询
+                    derived(衍生)
+                    union 第二个
+                    union result
+
+        type:
+                system:const的一种特例
+                const:索引一次就得到，主键索引或者个unique索引
+                eq_ref:
+                ref:K
+                index:
+                all:
+
+
+
+避免索引失效
+    1、全职匹配我最爱
+    2、最佳左前缀法则
+    3、不在索引列上做任何操作（计算，函数，自动或手动类型转换，会导致索引失效而转项全表扫描
+    4、存储引擎不能使用索引中范围条件右边的列
+    5、尽量使用覆盖索引（只访问索引的列的查询（索引列的查询和查询列一致）），减少select *
+    6、mysql在使用不等于（！=或者<>)无法使用索引
+    7、is null, is not null
+    8、like 以通配符开头（'%aa')(用覆盖索引来解决)
+    9、字符串不使用单引号会索引失效
+    10、少用or，or会引起索引失效
