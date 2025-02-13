@@ -15,6 +15,7 @@ public class SelectorSort {
 //        BubbleSort.printArray(array);
 
         double t=1;
+
         System.out.println(++t);
 
     }
